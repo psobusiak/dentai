@@ -2,6 +2,7 @@ import React from 'react';
 import DentalChart from './components/DentalChart';
 import ToothControls from './components/ToothControls';
 import PatientInfo from './components/PatientInfo';
+import TreatmentPlan from './components/TreatmentPlan';
 import { DentalProvider } from './contexts/DentalContext';
 import DentAILogo from './components/DentAILogo';
 
@@ -25,6 +26,7 @@ function App() {
         <main className="max-w-7xl mx-auto space-y-6">
           <DentalChart />
           <ToothControls />
+          <TreatmentPlan />
           <PatientInfo />
         </main>
         

@@ -89,7 +89,7 @@ export const generateInitialTeeth = () => {
   return teeth;
 };
 
-// Friendly names for tooth surfaces with descriptions
+// Surface descriptions
 export const SURFACE_DESCRIPTIONS = {
   'mesial': 'Mesial - Towards Midline',
   'distal': 'Distal - Away from midline',
@@ -99,6 +99,30 @@ export const SURFACE_DESCRIPTIONS = {
   'incisal': 'Incisal - Cutting edge (front teeth only)',
   'labial': 'Labial/Facial - Facing lip (front teeth only)',
   'full': 'Full Tooth'
+};
+
+// Treatment prices for each condition
+export const TREATMENT_PRICES = {
+  'decay': 150, // Basic cavity filling
+  'filling': 200, // Composite filling
+  'crown': 1200, // Porcelain crown
+  'root-canal': 1000, // Root canal treatment
+  'missing': 0, // No direct cost
+  'bridge': 3000, // 3-unit bridge
+  'implant': 3500, // Single implant
+  'healthy': 0
+};
+
+// Treatment descriptions
+export const TREATMENT_DESCRIPTIONS = {
+  'decay': 'Cavity removal and filling',
+  'filling': 'Composite filling replacement',
+  'crown': 'Porcelain crown placement',
+  'root-canal': 'Root canal treatment',
+  'missing': 'Missing tooth',
+  'bridge': 'Dental bridge placement',
+  'implant': 'Dental implant placement',
+  'healthy': 'No treatment needed'
 };
 
 // Friendly names for conditions
