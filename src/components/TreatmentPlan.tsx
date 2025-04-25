@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDental } from '../contexts/DentalContext';
 import { SURFACE_DESCRIPTIONS, TREATMENT_DESCRIPTIONS, TREATMENT_PRICES } from '../utils/constants';
-import { Calendar, Clock } from 'lucide-react';
+import { Calendar, Clock, Bell } from 'lucide-react';
 
 interface ScheduledTreatment {
   toothId: number;
@@ -96,7 +96,17 @@ const TreatmentPlan: React.FC = () => {
     const treatment = scheduledTreatments.find(
       t => t.toothId === toothId && t.surface === surface
     );
-    return treatment ? { date: treatment.scheduledDate, time: treatment.scheduledTime } : null;
+    if (!treatment) return null;
+
+    const appointmentDate = new Date(treatment.scheduledDate);
+    const reminderDate = new Date(appointmentDate);
+    reminderDate.setDate(reminderDate.getDate() - 1); // Set reminder to day before appointment
+
+    return {
+      date: treatment.scheduledDate,
+      time: treatment.scheduledTime,
+      reminderDate: reminderDate.toISOString().split('T')[0]
+    };
   };
 
   if (treatments.length === 0) {
@@ -127,12 +137,18 @@ const TreatmentPlan: React.FC = () => {
                   </h3>
                   <p className="text-sm text-gray-600 mt-1">{treatment.description}</p>
                   {scheduled && scheduledDateTime && (
-                    <p className="text-sm text-blue-600 mt-1 flex items-center">
-                      <Calendar size={14} className="mr-1" />
-                      {new Date(scheduledDateTime.date).toLocaleDateString()}
-                      <Clock size={14} className="ml-2 mr-1" />
-                      {scheduledDateTime.time}
-                    </p>
+                    <div className="text-sm text-blue-600 mt-1 space-y-1">
+                      <p className="flex items-center">
+                        <Calendar size={14} className="mr-1" />
+                        {new Date(scheduledDateTime.date).toLocaleDateString()}
+                        <Clock size={14} className="ml-2 mr-1" />
+                        {scheduledDateTime.time}
+                      </p>
+                      <p className="flex items-center text-gray-500">
+                        <Bell size={14} className="mr-1" />
+                        Reminder will be sent on {new Date(scheduledDateTime.reminderDate).toLocaleDateString()}
+                      </p>
+                    </div>
                   )}
                 </div>
                 <div className="text-right">
