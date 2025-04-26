@@ -3,13 +3,10 @@ import DentalChart from './components/DentalChart';
 import ToothControls from './components/ToothControls';
 import PatientInfo from './components/PatientInfo';
 import TreatmentPlan from './components/TreatmentPlan';
-import AudioRecorder from './components/AudioRecorder';
 import { DentalProvider } from './contexts/DentalContext';
 import DentAILogo from './components/DentAILogo';
 
 function App() {
-  const wsUrl = import.meta.env.VITE_WS_URL || 'ws://localhost:8000/api/v1/ws/audio';
-
   return (
     <DentalProvider>
       <div className="min-h-screen bg-gray-100 p-4 md:p-8">
@@ -31,20 +28,10 @@ function App() {
           <ToothControls />
           <TreatmentPlan />
           <PatientInfo />
-          <AudioRecorder 
-            wsUrl={wsUrl}
-            onAudioData={(data) => {
-              // Handle incoming audio data chunks
-              console.log('Received audio data chunk:', data);
-            }}
-          />
         </main>
         
         <footer className="max-w-7xl mx-auto mt-8 pt-4 border-t border-gray-200">
-          <div className="flex justify-between text-sm text-gray-500">
-            <p>© 2025 DentAI. All rights reserved.</p>
-            <p>Version 1.0.0</p>
-          </div>
+          <p className="text-sm text-gray-500 text-center">© 2024 DentAI. All rights reserved.</p>
         </footer>
       </div>
     </DentalProvider>
